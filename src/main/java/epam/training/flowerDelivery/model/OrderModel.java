@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 
 @Entity
@@ -15,11 +16,12 @@ public class OrderModel
 	{
 	}
 
-	public OrderModel(BigDecimal cost, String paymentStatus, String deliveryStatus)
+	public OrderModel(BigDecimal cost, String paymentStatus, String deliveryStatus, CustomerModel customerModel)
 	{
 		this.cost = cost;
 		this.deliveryStatus = deliveryStatus;
 		this.paymentStatus = paymentStatus;
+		this.customerModel = customerModel;
 	}
 
 	@Id
@@ -28,6 +30,9 @@ public class OrderModel
 	private BigDecimal cost;
 	private String deliveryStatus;
 	private String paymentStatus;
+
+	@ManyToOne
+	private CustomerModel customerModel;
 
 	public Long getOrderId()
 	{
@@ -67,5 +72,25 @@ public class OrderModel
 	public void setDeliveryStatus(String deliveryStatus)
 	{
 		this.deliveryStatus = deliveryStatus;
+	}
+
+	public CustomerModel getCustomerModel()
+	{
+		return customerModel;
+	}
+
+	public void setCustomerModel(CustomerModel customerModel)
+	{
+		this.customerModel = customerModel;
+	}
+
+	public Long getId()
+	{
+		return id;
+	}
+
+	public void setId(Long id)
+	{
+		this.id = id;
 	}
 }
