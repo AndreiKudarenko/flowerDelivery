@@ -1,9 +1,14 @@
 package epam.training.flowerDelivery.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -29,8 +34,8 @@ public class CustomerModel
 	private String FirstName;
 	private String SecondName;
 	private int age;
-	@OneToMany
-	private OrderModel orderModel;
+	@OneToMany(mappedBy = "customerModel", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<OrderModel> orderModel;
 
 	public Long getCustomerId()
 	{
@@ -72,12 +77,12 @@ public class CustomerModel
 		this.age = age;
 	}
 
-	public OrderModel getOrderModel()
+	public List<OrderModel> getOrderModel()
 	{
 		return orderModel;
 	}
 
-	public void setOrderModel(OrderModel orderModel)
+	public void setOrderModel(List<OrderModel> orderModel)
 	{
 		this.orderModel = orderModel;
 	}
